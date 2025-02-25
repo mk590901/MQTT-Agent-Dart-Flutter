@@ -110,11 +110,15 @@ class MqttService {
     final String payload = MqttPublishPayload.bytesToStringAsString(message.payload.message);
     print('Received message: $payload from topic: $topic');
     _cb.call('Publish', true, payload, true);
+
+    bridge.post('Unsubscribe');
   }
 
   void onConnected() {
     print('******* onConnected $_server *******');
     _cb.call('Connect', true, 'Connected to $_server', true);
+
+    bridge.post('Subscribe');
   }
 
   void onDisconnected() {
@@ -128,6 +132,8 @@ class MqttService {
   void onSubscribed(String topic) {
     print('******* onSubscribed to topic: $topic *******');
     _cb.call('Subscribe', true, 'Subscribed to $topic', true);
+
+    bridge.post('Publish');
   }
 
   void onUnsubscribed(String? topic) {
@@ -136,6 +142,7 @@ class MqttService {
     if (bridge.isSubscribed()) {
       bridge.post('Unsubscribe');
     }
+    bridge.post('Disconnect');
   }
 
 }

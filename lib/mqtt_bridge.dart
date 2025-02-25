@@ -25,13 +25,13 @@ class MQTTBridge {
         result = subscribeCB;
         break;
       case 'Publish':
-        result = publishCB;
+        result = connectCB; //publishCB;
         break;
       case 'Unsubscribe':
-        result = unsubscribeCB;
+        result = connectCB; //unsubscribeCB;
         break;
       case 'Disconnect':
-        result = disconnectCB;
+        result = connectCB; // disconnectCB;
         break;
     }
     return result;
