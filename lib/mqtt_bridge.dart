@@ -22,7 +22,7 @@ class MQTTBridge {
         result = connectCB;
         break;
       case 'Subscribe':
-        result = subscribeCB;
+        result = connectCB; //subscribeCB;
         break;
       case 'Publish':
         result = connectCB; //publishCB;
