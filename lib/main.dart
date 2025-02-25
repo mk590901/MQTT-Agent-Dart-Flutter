@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'client_helper.dart';
 import 'main_screen.dart';
 import 'message_bloc.dart';
 
 void main() {
+  ClientHelper.initInstance();
   runApp(MyApp());
 }
 

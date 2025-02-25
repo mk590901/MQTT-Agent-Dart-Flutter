@@ -4,8 +4,9 @@ import 'dart:math';
 import 'package:intl/intl.dart';
 import '../core/q_hsm_helper.dart';
 import '../core/threaded_code_executor.dart';
-import 'mqtt_bridge_mock.dart';
+import 'mqtt_bridge.dart';
 //import 'mqtt_client.dart';
+import 'mqtt_client.dart';
 import 'typedef.dart';
 
 class MqttHelper {
@@ -16,7 +17,7 @@ class MqttHelper {
 
 	final Random random = Random();
 
-	//late MQTTClient mqttClient;
+	late MQTTClient mqttClient;
 
 	void response(String tag, bool ok, String text, bool next) {
 		print('- MqttHelper.response->[$text]->[$ok] [${helper_.getState()}] =');
@@ -31,7 +32,7 @@ class MqttHelper {
 	}
 
 	MqttHelper (this.callbackFunction, this.bridge) {
-		//mqttClient = MQTTClient(response, bridge);
+		mqttClient = MQTTClient(response, bridge);
 		createHelper();
 	}
 
@@ -67,7 +68,7 @@ class MqttHelper {
 
 	void disconnectedConnect ([Object? data]){
 
-		//mqttClient.connect();
+		mqttClient.connect();
 		// String dateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 		// print ('- $dateTime disconnectedConnect -');
 		//
@@ -76,41 +77,39 @@ class MqttHelper {
 		// dateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 		// print ('+ $dateTime disconnectedConnect +');
 
-		bool rc = oracle();
-
-		callbackFunction.call('Connect', rc,'disconnectedConnect', true);
+		// bool rc = oracle();
+		// callbackFunction.call('Connect', rc,'disconnectedConnect', true);
 	}
 
 	// void connectingEntry([Object? data]) {
 	// }
 
 	void disconnectedDisconnect([Object? data]) {
-		callbackFunction.call('Disconnect', true,'disconnectedDisconnect', false);
+		callbackFunction.call('Disconnect', true,'Already disconnected', false);
 	}
 
 	// void disconnectedExit([Object? data]) {
 	// }
 
 	void disconnectedSubscribe([Object? data]) {
-		callbackFunction.call('Subscribe', false,'disconnectedSubscribe', false);
+		callbackFunction.call('Subscribe', false,'Not connected', false);
 	}
 
 	void disconnectedPublish([Object? data]) {
-		callbackFunction.call('Publish', false,'disconnectedPublish', false);
+		callbackFunction.call('Publish', false,'Not connected', false);
 	}
 
 	void disconnectedUnsubscribe([Object? data]) {
-		callbackFunction.call('Unsubscribe', false,'disconnectedUnsubscribe', false);
+		callbackFunction.call('Unsubscribe', false,'Not connected', false);
 	}
 
 	// void connectedExit([Object? data]) {
 	// }
 
 	void connectedDisconnect([Object? data]) {
-		//mqttClient.disconnect();
-		bool rc = oracle();
-		callbackFunction.call('Disconnect', rc,'disconnectedConnect', false);
-
+		mqttClient.disconnect();
+		// bool rc = oracle();
+		// callbackFunction.call('Disconnect', rc,'disconnectedConnect', false);
 	}
 
 	void awaitSubscribeConnect([Object? data]) {
@@ -124,9 +123,9 @@ class MqttHelper {
 	// }
 
 	void awaitSubscribeSubscribe([Object? data]) {
-		//mqttClient.subscribe();
-		bool rc = oracle();
-		callbackFunction.call('Subscribe', rc,'awaitSubscribeSubscribe', true);
+		mqttClient.subscribe();
+		// bool rc = oracle();
+		// callbackFunction.call('Subscribe', rc,'awaitSubscribeSubscribe', true);
 	}
 
 	// void subscribingEntry([Object? data]) {
@@ -144,16 +143,16 @@ class MqttHelper {
 	// }
 
 	void subscribedUnsubscribe([Object? data]) {
-		//mqttClient.unsubscribe();
-		bool rc = true; //oracle();
-		callbackFunction.call('Unsubscribe', rc,'subscribedUnsubscribe', false);	//	true
+		mqttClient.unsubscribe();
+		// bool rc = true; //oracle();
+		// callbackFunction.call('Unsubscribe', rc,'subscribedUnsubscribe', false);	//	true
 	}
 
 	// void connectedInit([Object? data]) {
 	// }
 
 	void awaitPublishingConnect([Object? data]) {
-		callbackFunction.call('Connect', true,'awaitPublishingConnect', false);
+		callbackFunction.call('Connect', true,'Already connected', false);
 	}
 
 	// void awaitPublishingExit([Object? data]) {
@@ -167,9 +166,9 @@ class MqttHelper {
 	}
 
 	void awaitPublishingPublish([Object? data]) {
-		//mqttClient.publish();
-		bool rc = oracle();
-		callbackFunction.call('Publish', rc,'awaitPublishingPublish', true);
+		mqttClient.publish();
+		// bool rc = oracle();
+		// callbackFunction.call('Publish', rc,'awaitPublishingPublish', true);
 	}
 
 	// void publishingEntry([Object? data]) {

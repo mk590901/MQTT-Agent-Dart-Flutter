@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'message_bloc.dart';
-import 'mqtt_bridge_mock.dart';
+import 'mqtt_bridge.dart';
 import 'task_wrapper.dart';
 import 'typedef.dart';
 
@@ -100,7 +100,8 @@ class ButtonBloc extends Bloc<ButtonEvent, ButtonState> {
     emit(ButtonLoading());
     context.read<MessageBloc>().add(ClearMessages()); // Clear messages list
     TaskWrapper task = TaskWrapper(
-      functions: [disconnect, connect, subscribe, publish, unsubscribe, disconnect],
+      //functions: [disconnect, connect, subscribe, publish, unsubscribe, disconnect],
+      functions: [connect, subscribe],
       onMessageReceived: (rc, message) {
         context.read<MessageBloc>().add(MessageReceived(rc,message));
       },

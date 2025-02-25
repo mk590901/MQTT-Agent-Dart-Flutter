@@ -14,7 +14,7 @@ class TaskWrapper {
     required this.onMessageReceived,
     required this.onProcessStarted,
     required this.onProcessCompleted,
-    this.nRetries = 3,
+    this.nRetries = 3,  //  3
   });
 
   Future<void> execute() async {
@@ -23,6 +23,7 @@ class TaskWrapper {
     bool shouldBreak = false;
 
     for (var function in functions) {
+
       if (shouldBreak) {
         break;
       }
@@ -39,7 +40,8 @@ class TaskWrapper {
               result = false;
               shouldBreak = true;
             }
-          } else {
+          }
+          else {
             functionSuccess = true;
           }
         });
