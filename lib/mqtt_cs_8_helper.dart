@@ -1,34 +1,23 @@
 //	Class Mqtt_cs_8Helper automatically generated at 2025-02-13 12:20:09
 import 'dart:math';
 
-import 'package:intl/intl.dart';
 import '../core/q_hsm_helper.dart';
 import '../core/threaded_code_executor.dart';
 import 'mqtt_bridge.dart';
-//import 'mqtt_client.dart';
 import 'mqtt_client.dart';
 import 'typedef.dart';
 
 class MqttHelper {
 	final QHsmHelper	helper_ = QHsmHelper('MQTTClientServer');
-	//final VoidCallbackBoolString callbackFunction;
 	final VoidCallbackStringBoolString callbackFunction;
 	final MQTTBridge bridge;
 
-	final Random random = Random();
-
-	late MQTTClient mqttClient;
+	late 	MQTTClient mqttClient;
 
 	void response(String tag, bool ok, String text, bool next) {
 		print('- MqttHelper.response->[$text]->[$ok] [${helper_.getState()}] =');
 		callbackFunction.call(tag,ok,text,next);
 		print('+ MqttHelper.response->[$text]->[$ok] [${helper_.getState()}] +');
-		// if (ok) {
-		// 	print('MqttHelper.Succeeded: $text');
-		// }
-		// else {
-		// 	print('MqttHelper.Failed:    $text');
-		// }
 	}
 
 	MqttHelper (this.callbackFunction, this.bridge) {
@@ -45,40 +34,8 @@ class MqttHelper {
 	// void disconnectedEntry([Object? data]) {
 	// }
 
-	Future<void> delay_(int seconds) async {
-		await Future.delayed(Duration(seconds: seconds));
-	}
-
-	void delay() async {
-		await delay_(5);
-	}
-
-
-	bool oracle() {
-		int value = getRandomInRange(1,100);
-		return (value > 48 ? true : false);
-	}
-
-	int getRandomInRange(int min, int max) {
-		if (min > max) {
-			throw ArgumentError('min should be less than or equal to max');
-		}
-		return min + random.nextInt(max - min + 1);
-	}
-
 	void disconnectedConnect ([Object? data]){
-
 		mqttClient.connect();
-		// String dateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
-		// print ('- $dateTime disconnectedConnect -');
-		//
-		// delay();
-		//
-		// dateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
-		// print ('+ $dateTime disconnectedConnect +');
-
-		// bool rc = oracle();
-		// callbackFunction.call('Connect', rc,'disconnectedConnect', true);
 	}
 
 	// void connectingEntry([Object? data]) {
@@ -108,8 +65,6 @@ class MqttHelper {
 
 	void connectedDisconnect([Object? data]) {
 		mqttClient.disconnect();
-		// bool rc = oracle();
-		// callbackFunction.call('Disconnect', rc,'disconnectedConnect', false);
 	}
 
 	void awaitSubscribeConnect([Object? data]) {
@@ -124,8 +79,6 @@ class MqttHelper {
 
 	void awaitSubscribeSubscribe([Object? data]) {
 		mqttClient.subscribe();
-		// bool rc = oracle();
-		// callbackFunction.call('Subscribe', rc,'awaitSubscribeSubscribe', true);
 	}
 
 	// void subscribingEntry([Object? data]) {
@@ -144,8 +97,6 @@ class MqttHelper {
 
 	void subscribedUnsubscribe([Object? data]) {
 		mqttClient.unsubscribe();
-		// bool rc = true; //oracle();
-		// callbackFunction.call('Unsubscribe', rc,'subscribedUnsubscribe', false);	//	true
 	}
 
 	// void connectedInit([Object? data]) {
@@ -167,8 +118,6 @@ class MqttHelper {
 
 	void awaitPublishingPublish([Object? data]) {
 		mqttClient.publish();
-		// bool rc = oracle();
-		// callbackFunction.call('Publish', rc,'awaitPublishingPublish', true);
 	}
 
 	// void publishingEntry([Object? data]) {
@@ -517,6 +466,6 @@ class MqttHelper {
 	}
 
   void setUnitTest() {
-		//mqttClient.setUnitTest();
+		mqttClient.setUnitTest();
 	}
 }

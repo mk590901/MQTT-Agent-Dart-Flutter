@@ -100,8 +100,7 @@ class ButtonBloc extends Bloc<ButtonEvent, ButtonState> {
     emit(ButtonLoading());
     context.read<MessageBloc>().add(ClearMessages()); // Clear messages list
     TaskWrapper task = TaskWrapper(
-      //functions: [disconnect, connect, subscribe, publish, unsubscribe, disconnect],
-      functions: [connect/*, subscribe*/],
+      functions: [disconnect, connect],
       onMessageReceived: (rc, message) {
         context.read<MessageBloc>().add(MessageReceived(rc,message));
       },

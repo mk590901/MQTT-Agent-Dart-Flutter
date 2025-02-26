@@ -9,54 +9,21 @@ class MQTTBridge {
   late MqttHelper  _hsmHelper;
   final VoidCallbackBoolString callbackFunction;
 
-  late VoidBridgeCallback? connectCB;
-  late VoidBridgeCallback? subscribeCB;
-  late VoidBridgeCallback? publishCB;
-  late VoidBridgeCallback? unsubscribeCB;
-  late VoidBridgeCallback? disconnectCB;
+  late VoidBridgeCallback? bridgeCB;
+
+  // late VoidBridgeCallback? connectCB;
+  // late VoidBridgeCallback? subscribeCB;
+  // late VoidBridgeCallback? publishCB;
+  // late VoidBridgeCallback? unsubscribeCB;
+  // late VoidBridgeCallback? disconnectCB;
 
   VoidBridgeCallback? getCallbackFunction(String tag) {
-    VoidBridgeCallback? result;
-    switch (tag) {
-      case 'Connect':
-        result = connectCB;
-        break;
-      case 'Subscribe':
-        result = connectCB; //subscribeCB;
-        break;
-      case 'Publish':
-        result = connectCB; //publishCB;
-        break;
-      case 'Unsubscribe':
-        result = connectCB; //unsubscribeCB;
-        break;
-      case 'Disconnect':
-        result = connectCB; // disconnectCB;
-        break;
-    }
-    return result;
+    return bridgeCB;
   }
 
   void putCallbackFunction(String tag, VoidBridgeCallback? cb) {
-    switch (tag) {
-      case 'Connect':
-        connectCB = cb;
-        break;
-      case 'Subscribe':
-        subscribeCB = cb;
-        break;
-      case 'Publish':
-        publishCB = cb;
-        break;
-      case 'Unsubscribe':
-        unsubscribeCB = cb;
-        break;
-      case 'Disconnect':
-        disconnectCB = cb;
-        break;
-    }
+    bridgeCB = cb;
   }
-
 
   void response(String tag, bool ok, String text, bool next) {
     print('MQTTBridge.response [$tag]->[$text]->[$ok]');
@@ -64,7 +31,6 @@ class MQTTBridge {
 
     VoidBridgeCallback? cb = getCallbackFunction(tag);
     cb?.call(ok,text);
-    //cb = null;
 
     if (ok) {
       if (next) {
