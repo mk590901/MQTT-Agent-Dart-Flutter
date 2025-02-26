@@ -6,11 +6,11 @@ import 'message_bloc.dart';
 
 void main() {
   ClientHelper.initInstance();
-  runApp(MyApp());
+  runApp(MQTTSinkApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MQTTSinkApp extends StatelessWidget {
+  const MQTTSinkApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        home: MyScreen(),
+        home: ActionsScreen(),
       ),
     );
   }

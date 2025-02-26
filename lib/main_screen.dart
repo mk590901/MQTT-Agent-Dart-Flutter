@@ -4,13 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'button_bloc.dart';
 import 'message_bloc.dart';
 
-class MyScreen extends StatelessWidget {
-  const MyScreen({super.key});
+class ActionsScreen extends StatelessWidget {
+  const ActionsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('BLoC Example')),
+      appBar: AppBar(title: Text('MQTT Sink App')),
       body: Column(
         children: [
           BlocProvider(
@@ -33,7 +33,7 @@ class MyScreen extends StatelessWidget {
                       child: Text(
                         state is ButtonLoading
                             ? 'Task in progress'
-                            : (state is ButtonFailure ? 'Retry' : 'Start task'),
+                            : (state is ButtonFailure ? 'Retry' : 'GO'),
                       ),
                     ),
                     if (state is ButtonLoading)
@@ -55,7 +55,9 @@ class MyScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return ListTile(title: Text(
                           state.messages[index].second,
-                          style: TextStyle(color: state.messages[index].first ? Colors.blueAccent : Colors.red)),
+                          style: TextStyle(color: state.messages[index].first ? Colors.blueAccent : Colors.red,
+                          fontSize: 14)
+                      ),
                       );
                     },
                   );
