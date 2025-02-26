@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +16,9 @@ abstract class ButtonEvent extends Equatable {
 }
 
 class ButtonPressed extends ButtonEvent {}
+
 class ButtonProcessStarted extends ButtonEvent {}
+
 class ButtonProcessCompleted extends ButtonEvent {
   final bool result;
 
@@ -44,9 +44,8 @@ class ButtonFailure extends ButtonState {}
 // ButtonBloc
 class ButtonBloc extends Bloc<ButtonEvent, ButtonState> {
   final BuildContext context;
-  final Random random = Random();
 
-  late MQTTBridge mqttBridge;
+  late  MQTTBridge mqttBridge;
 
   Future<void> connect(VoidBridgeCallback cb) async {
     print ('******* connect [${mqttBridge.state()}] *******');
@@ -97,93 +96,4 @@ class ButtonBloc extends Bloc<ButtonEvent, ButtonState> {
     emit(event.result ? ButtonSuccess() : ButtonFailure());
   }
 
-  bool oracle() {
-    int value = getRandomInRange(1,100);
-    return (value > 48 ? true : false);
-  }
-
-  int getRandomInRange(int min, int max) {
-    if (min > max) {
-      throw ArgumentError('min should be less than or equal to max');
-    }
-    return min + random.nextInt(max - min + 1);
-  }
-
 }
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:equatable/equatable.dart';
-//
-// import 'message_bloc.dart';
-// import 'task_wrapper.dart';
-//
-// // Events for ButtonBloc
-// abstract class ButtonEvent extends Equatable {
-//   const ButtonEvent();
-//
-//   @override
-//   List<Object> get props => [];
-// }
-//
-// class ButtonPressed extends ButtonEvent {}
-// class ButtonProcessStarted extends ButtonEvent {}
-// class ButtonProcessCompleted extends ButtonEvent {
-//   final bool result;
-//
-//   const ButtonProcessCompleted(this.result);
-//
-//   @override
-//   List<Object> get props => [result];
-// }
-//
-// // States for ButtonBloc
-// abstract class ButtonState extends Equatable {
-//   const ButtonState();
-//
-//   @override
-//   List<Object> get props => [];
-// }
-//
-// class ButtonInitial extends ButtonState {}
-// class ButtonLoading extends ButtonState {}
-// class ButtonSuccess extends ButtonState {}
-// class ButtonFailure extends ButtonState {}
-//
-// // ButtonBloc
-// class ButtonBloc extends Bloc<ButtonEvent, ButtonState> {
-//   final BuildContext context;
-//
-//   ButtonBloc(this.context) : super(ButtonInitial()) {
-//     on<ButtonPressed>(_onButtonPressed);
-//     on<ButtonProcessStarted>(_onButtonProcessStarted);
-//     on<ButtonProcessCompleted>(_onButtonProcessCompleted);
-//   }
-//
-//   Future<void> _onButtonPressed(ButtonPressed event, Emitter<ButtonState> emit) async {
-//     emit(ButtonLoading());
-//     TaskWrapper task = TaskWrapper(
-//       onMessageReceived: (message) {
-//         print('_onButtonPressed.onMessageReceived << $message');
-//         context.read<MessageBloc>().add(MessageReceived(message));
-//       },
-//       onProcessStarted: () {
-//         add(ButtonProcessStarted());
-//       },
-//       onProcessCompleted: (result) {
-//         add(ButtonProcessCompleted(result));
-//       },
-//     );
-//     await task.execute();
-//   }
-//
-//   void _onButtonProcessStarted(ButtonProcessStarted event, Emitter<ButtonState> emit) {
-//     emit(ButtonLoading());
-//   }
-//
-//   void _onButtonProcessCompleted(ButtonProcessCompleted event, Emitter<ButtonState> emit) {
-//     emit(event.result ? ButtonSuccess() : ButtonFailure());
-//   }
-// }

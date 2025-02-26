@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'mqtt_bridge.dart';
 import 'mqtt_service.dart';
 import 'typedef.dart';
@@ -9,7 +8,7 @@ class MQTTClient {
   late MqttService mqttService;
 
   final String subscribeTopic = 'hsm_v2/topic';
-  //final VoidCallbackBoolString callbackFunction;
+
   final VoidCallbackStringBoolString callbackFunction;
   final MQTTBridge bridge;
 
@@ -18,7 +17,7 @@ class MQTTClient {
   }
 
   void connect () {
-    //print('******* connect *******');
+    print('******* connect *******');
     mqttService.connect();
   }
 
@@ -29,20 +28,17 @@ class MQTTClient {
 
   void publish () {
     print('******* publish *******');
-    mqttService.publish(subscribeTopic, randomString(32));
-    //callbackFunction.call(oracle(), 'Publish');
+    mqttService.publish(subscribeTopic, randomString(128));
   }
 
   void unsubscribe () {
     print('******* unsubscribe *******');
     mqttService.unsubscribe(subscribeTopic);
-    //callbackFunction.call(oracle(), 'Unsubscribe');
   }
 
   void disconnect () {
     print('******* disconnect *******');
     mqttService.disconnect();
-    //callbackFunction.call(oracle(), 'Disconnect');
   }
 
   String randomString(int length) {

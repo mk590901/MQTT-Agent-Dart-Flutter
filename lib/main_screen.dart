@@ -10,7 +10,18 @@ class ActionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('MQTT Sink App')),
+
+      //appBar: AppBar(title: Text('MQTT Sink App')),
+      appBar: AppBar(
+        title: Text('MQTT Sink App',
+            style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic)),
+        backgroundColor: Colors.blueAccent,
+        foregroundColor: Colors.white,
+        leading: IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.bolt_sharp, color: Colors.white)),
+      ),
+
       body: Column(
         children: [
           BlocProvider(
