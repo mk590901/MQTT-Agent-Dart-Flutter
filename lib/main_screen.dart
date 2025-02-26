@@ -77,7 +77,7 @@ class ActionsScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('MQTT Sink App',
+          title: Text('MQTT Agent App',
               style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic)),
           backgroundColor: Colors.blueAccent,
           foregroundColor: Colors.white,
