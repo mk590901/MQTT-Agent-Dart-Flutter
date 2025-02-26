@@ -1,35 +1,25 @@
-import 'dart:io';
-import 'dart:math';
-
 import 'mqtt_cs_8_helper.dart';
-//import 'mqtt_cs_9_helper.dart';
 import 'typedef.dart';
 
 class MQTTBridge {
-  late MqttHelper  _hsmHelper;
+  late  MqttHelper  _hsmHelper;
   final VoidCallbackBoolString callbackFunction;
 
   late VoidBridgeCallback? bridgeCB;
 
-  // late VoidBridgeCallback? connectCB;
-  // late VoidBridgeCallback? subscribeCB;
-  // late VoidBridgeCallback? publishCB;
-  // late VoidBridgeCallback? unsubscribeCB;
-  // late VoidBridgeCallback? disconnectCB;
-
-  VoidBridgeCallback? getCallbackFunction(String tag) {
+  VoidBridgeCallback? getCallbackFunction() {
     return bridgeCB;
   }
 
-  void putCallbackFunction(String tag, VoidBridgeCallback? cb) {
+  void putCallbackFunction(VoidBridgeCallback? cb) {
     bridgeCB = cb;
   }
 
   void response(String tag, bool ok, String text, bool next) {
-    print('MQTTBridge.response [$tag]->[$text]->[$ok]');
-    //connectCB?.call(ok,text);
 
-    VoidBridgeCallback? cb = getCallbackFunction(tag);
+    print('MQTTBridge.response [$tag]->[$text]->[$ok]');
+
+    VoidBridgeCallback? cb = getCallbackFunction();
     cb?.call(ok,text);
 
     if (ok) {
@@ -58,8 +48,7 @@ class MQTTBridge {
   }
 
   void post2 (String eventName, [VoidBridgeCallback? cb]) {
-    //connectCB = cb;
-    putCallbackFunction(eventName, cb);
+    putCallbackFunction(cb);
     _hsmHelper.run(eventName);
   }
 
