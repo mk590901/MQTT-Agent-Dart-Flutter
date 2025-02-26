@@ -18,7 +18,7 @@ class ActionsScreen extends StatelessWidget {
         foregroundColor: Colors.white,
         leading: IconButton(
             onPressed: () {},
-            icon: Icon(Icons.bolt_sharp, color: Colors.white)),
+            icon: Icon(Icons.cloud_upload_outlined, color: Colors.white)),
       ),
 
       body: Column(
