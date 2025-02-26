@@ -47,7 +47,7 @@ class MQTTBridge {
     _hsmHelper.run(eventName);
   }
 
-  void post2 (String eventName, [VoidBridgeCallback? cb]) {
+  void postComposite (String eventName, [VoidBridgeCallback? cb]) {
     putCallbackFunction(cb);
     _hsmHelper.run(eventName);
   }

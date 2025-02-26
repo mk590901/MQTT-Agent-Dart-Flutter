@@ -49,12 +49,12 @@ class ButtonBloc extends Bloc<ButtonEvent, ButtonState> {
 
   Future<void> connect(VoidBridgeCallback cb) async {
     print ('******* connect [${mqttBridge.state()}] *******');
-    mqttBridge.post2('Connect', cb);
+    mqttBridge.postComposite('Connect', cb);
   }
 
   Future<void> disconnect(VoidBridgeCallback cb) async {
     print ('******* disconnect [${mqttBridge.state()}] *******');
-    mqttBridge.post2('Disconnect', cb);
+    mqttBridge.postComposite('Disconnect', cb);
   }
 
   void response(bool rc, String text, bool next) {
