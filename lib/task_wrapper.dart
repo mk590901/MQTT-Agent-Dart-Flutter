@@ -1,5 +1,3 @@
-//typedef VoidBridgeCallback = void Function(bool retcode, String parameter);
-
 import 'typedef.dart';
 
 class TaskWrapper {
@@ -14,7 +12,7 @@ class TaskWrapper {
     required this.onMessageReceived,
     required this.onProcessStarted,
     required this.onProcessCompleted,
-    this.nRetries = 3,  //  3
+    this.nRetries = 1,
   });
 
   Future<void> execute() async {

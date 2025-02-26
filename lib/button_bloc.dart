@@ -53,32 +53,7 @@ class ButtonBloc extends Bloc<ButtonEvent, ButtonState> {
     mqttBridge.post2('Connect', cb);
   }
 
-  Future<void> subscribe(VoidBridgeCallback cb) async {
-    print ('******* subscribe [${mqttBridge.state()}] *******');
-    mqttBridge.post2('Subscribe', cb);
-  }
-
-  Future<void> publish(VoidBridgeCallback cb) async {
-    //await Future.delayed(Duration(milliseconds: 120));
-    //bool rc = oracle();
-    //cb(rc, rc ? 'publish done' : 'publish failed');
-    print ('******* publish [${mqttBridge.state()}] *******');
-    mqttBridge.post2('Publish', cb);
-  }
-
-  Future<void> unsubscribe(VoidBridgeCallback cb) async {
-    // await Future.delayed(Duration(milliseconds: 150));
-    // bool rc = oracle();
-    // cb(rc, rc ? 'unsubscribe done' : 'unsubscribe failed');
-    print ('******* unsubscribe [${mqttBridge.state()}] *******');
-    mqttBridge.post2('Unsubscribe', cb);
-  }
-
   Future<void> disconnect(VoidBridgeCallback cb) async {
-    //await Future.delayed(Duration(milliseconds: 50));
-    //await Future.delayed(Duration.zero);
-    // bool rc = oracle();
-    // cb(rc, rc ? 'disconnect done' : 'disconnect failed');
     print ('******* disconnect [${mqttBridge.state()}] *******');
     mqttBridge.post2('Disconnect', cb);
   }
