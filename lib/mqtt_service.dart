@@ -10,7 +10,6 @@ class MqttService {
   //static const String _server = 'broker.hivemq.com';
   static String flutterClient = ClientHelper.instance()?.clientId()?? 'flutter_client' ;//'flutter_client';
   final MqttServerClient _client = MqttServerClient(_server, flutterClient);
-  //final VoidCallbackBoolString _cb;
   final VoidCallbackStringBoolString _cb;
   final MQTTBridge bridge;
 
@@ -60,9 +59,7 @@ class MqttService {
       print('Exception: $error');
       disconnect();
     });
-
     _cb.call('Connect', true, 'Connecting to $_server started', true);
-
   }
 
   void disconnect() {
@@ -117,7 +114,6 @@ class MqttService {
   void onConnected() {
     print('******* onConnected $_server *******');
     _cb.call('Connect', true, 'Connected to $_server', true);
-
     bridge.post('Subscribe');
   }
 
@@ -132,7 +128,6 @@ class MqttService {
   void onSubscribed(String topic) {
     print('******* onSubscribed to topic: $topic *******');
     _cb.call('Subscribe', true, 'Subscribed to $topic', true);
-
     bridge.post('Publish');
   }
 
