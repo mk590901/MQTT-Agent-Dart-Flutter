@@ -11,7 +11,6 @@ class ActionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      //appBar: AppBar(title: Text('MQTT Sink App')),
       appBar: AppBar(
         title: Text('MQTT Sink App',
             style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic)),
