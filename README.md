@@ -18,7 +18,7 @@ It is shown below. This is the same state machine as in the previous project htt
 
 ![output1](https://github.com/user-attachments/assets/cd3d2a50-0259-40bb-bf5e-1d0e6aedb74e)
 
-## How the application works.
+## How the application works
 
 I'll immediately note that the GUI does not differ in any special delights. There is a __GO__ button that you need to press. After pressing, a list of completed steps appears. And that's all. The first movie also shows the error situations that occur when there is no network.
 
