@@ -8,7 +8,7 @@ The __MQTT Agent__ application, using the previously created __MQTT Client__ (ht
 
 ## Target
 
-For example, it would be good to add the ability to quickly transfer and save __HSM schemes__ and __generated code__ files on the desktop to the graphical editor. After all, this is where this code is used to create applications. Of course, can use a regular __USB__ cable to transfer data from your phone to a computer or __e-mail__, but if you can make it a little more convenient for the user, then why not do it? Naturally, need to write an application for the desktop to receive data. When writing, can use the same MQTT client in a console application on dart.
+For example, it would be good to add the ability to quickly transfer and save __HSM schemes__ and __generated code__ files on the desktop to the graphical editor. After all, this is where this code is used to create applications. Of course, can use a regular __USB__ cable to transfer data from your phone to a computer or __e-mail__, but if you can make it a little more convenient for the user, then why not do it? Naturally, need to write an application for the desktop to receive data. When writing, can use the same __MQTT client__ in a console application on dart.
 
 The execution of data transfer operations can be interrupted due to external errors at any of the five steps, but the state machine allows you to simplify the implementation of the proposed approach. And this approach is extremely simple: in case of successful completion of the current step, you need to send an event to activate the next action through the __MQTTBridge__ bridge object.
 
